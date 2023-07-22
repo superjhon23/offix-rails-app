@@ -1,0 +1,31 @@
+<p style="color: green"><%= notice %></p>
+
+<div>
+  <% if @department.cover.attached? %>
+  <div>
+    <%= image_tag @department.cover, alt:"Department cover" %>
+  </div>
+  <% end %>
+  
+  <p>
+    <strong>Name:</strong>
+    <%= @department.name %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= @department.description %>
+  </p>
+
+  <p>
+    <strong>Employees count:</strong>
+    <%= @department.employees_count %>
+  </p>
+</div>
+
+<div>
+  <%= link_to "Edit this department", edit_department_path(@department) %> |
+  <%= link_to "Back to departments", departments_path %>
+
+  <%= button_to "Destroy this department", @department, method: :delete %>
+</div>

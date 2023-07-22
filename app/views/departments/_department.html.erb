@@ -1,0 +1,23 @@
+<div id="<%= dom_id department %>">
+  <% if department.cover.attached? %>
+  <div>
+    <%= image_tag department.cover, alt:"Department cover" %>
+  </div>
+  <% end %>
+
+  <p>
+    <strong>Name:</strong>
+    <%= department.name %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= department.description %>
+  </p>
+
+  <p>
+    <strong>Employees count:</strong>
+    <%= department.employees_count %>
+  </p>
+
+</div>

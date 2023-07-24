@@ -1,22 +1,28 @@
 <div id="<%= dom_id employee %>">
+  <div>
+    <% if employee.avatar.attached? %>
+      <%= image_tag employee.avatar, alt: "Avatar image", style:"width: 90px" %>
+    <% end %>
+  </div>
   <p>
-    <strong>Name:</strong>
-    <%= employee.name %>
+    <strong><%= employee.name %></strong>
   </p>
 
   <p>
-    <strong>Nationality:</strong>
+    <%= employee.department.name %>
+  </p>
+
+  <p>
     <%= employee.nationality %>
+  </p>
+  
+  <p>
+    <%= employee.position %>
   </p>
 
   <p>
     <strong>Email:</strong>
     <%= employee.email %>
-  </p>
-
-  <p>
-    <strong>Position:</strong>
-    <%= employee.position %>
   </p>
 
   <p>
@@ -27,11 +33,6 @@
   <p>
     <strong>Role:</strong>
     <%= employee.role %>
-  </p>
-
-  <p>
-    <strong>Department:</strong>
-    <%= employee.department_id %>
   </p>
 
   <p>

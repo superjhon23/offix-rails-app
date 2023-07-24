@@ -22,6 +22,9 @@ class EmployeesController < ApplicationController
   # POST /employees or /employees.json
   def create
     @employee = Employee.new(employee_params)
+    if !@employee.avatar.attached?
+      @employee.avatar.attach(io: File.open("app/assets/images/default_pic.jpg"), filename: "default_default_pic.jpg")
+    end
 
     respond_to do |format|
       if @employee.save
@@ -38,7 +41,7 @@ class EmployeesController < ApplicationController
   def update
     respond_to do |format|
       if @employee.update(employee_params)
-        format.html { redirect_to employee_url(@employee), notice: "Employee was successfully updated." }
+        format.html { redirect_to @employee.department, notice: "Employee was successfully updated." }
         format.json { render :show, status: :ok, location: @employee }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +55,7 @@ class EmployeesController < ApplicationController
     @employee.destroy
 
     respond_to do |format|
-      format.html { redirect_to employees_url, notice: "Employee was successfully destroyed." }
+      format.html { redirect_to @employee.department, notice: "Employee was successfully destroyed.", status: :see_other}
       format.json { head :no_content }
     end
   end
@@ -65,6 +68,6 @@ class EmployeesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def employee_params
-      params.require(:employee).permit(:name, :nationality, :email, :position, :birth_date, :role, :department_id, :manager_id)
+      params.require(:employee).permit(:name, :nationality, :email, :position, :birth_date, :role, :department_id, :manager_id, :avatar)
     end
 end

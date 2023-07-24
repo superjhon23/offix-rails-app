@@ -43,12 +43,17 @@
 
   <div>
     <%= form.label :department_id, style: "display: block" %>
-    <%= form.text_field :department_id %>
+    <%= form.collection_select :department_id, Department.all, :id, :name %>
   </div>
 
   <div>
     <%= form.label :manager_id, style: "display: block" %>
-    <%= form.text_field :manager_id %>
+    <%= form.collection_select :manager_id, employee.id ? Employee.where(" id != ?",employee.id) : Employee.order(:name), :id, :name, include_blank: "No manager" %>
+  </div>
+
+  <div>
+    <%= form.label :avatar, style: "display: block" %>
+    <%= form.file_field :avatar %>
   </div>
 
   <div>

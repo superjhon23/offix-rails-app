@@ -18,8 +18,7 @@
   </p>
 
   <p>
-    <strong>Employees count:</strong>
-    <%= @department.employees_count %>
+    <%= link_to "New employee", new_employee_path %>
   </p>
 </div>
 
@@ -28,4 +27,17 @@
   <%= link_to "Back to departments", departments_path %>
 
   <%= button_to "Destroy this department", @department, method: :delete %>
+</div>
+<div>
+  <%= @department.employees.each do |employee| %>
+    <% if employee.avatar.attached? %>
+      <div>
+        <%= image_tag employee.avatar, alt:"Employee avatar", style: "width: 80px" %>
+      </div>
+    <% end %>
+    <p><%= employee.name %></p>
+    <p><%= employee.position %></p>
+    <%= link_to "Edit", edit_employee_path(employee) %>
+    <%= link_to "Delete", employee_path(employee), data: { turbo_method: :delete, confirm: "Are you sure?" } %>
+  <% end %>
 </div>

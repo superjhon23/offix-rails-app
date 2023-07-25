@@ -21,13 +21,19 @@
   </p>
 
   <p>
-    <strong>Email:</strong>
-    <%= employee.email %>
+    <% if employee.birth_date %>
+      <%= ((Time.zone.now - employee.birth_date.to_time)/1.year.seconds).floor %> years
+    <% else %>
+      Unknown age
+    <% end %>
   </p>
 
+  <%= link_to  "Edit", edit_employee_path(employee) %>
+  <%= button_to "Destroy", employee, method: :delete %>
+
   <p>
-    <strong>Birth date:</strong>
-    <%= employee.birth_date %>
+    <strong>Email:</strong>
+    <%= employee.email %>
   </p>
 
   <p>
@@ -36,8 +42,21 @@
   </p>
 
   <p>
+    <div>
     <strong>Manager:</strong>
-    <%= employee.manager_id %>
+    <% if employee.manager %>
+      <%= render "employees/employee_card", employee: employee.manager %>
+    <% else %>
+      No manager
+    <% end %>
+    </div>
+    <div>
+    <strong>Reports:</strong>
+    <% employee.reports.each do |report| %>
+      <%= render "employees/employee_card", employee: report %>
+    <% end %>
+    <% employee.reports.empty? ? "No reports" : "" %>
+    </div>
   </p>
 
 </div>

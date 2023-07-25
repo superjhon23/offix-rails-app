@@ -30,14 +30,6 @@
 </div>
 <div>
   <%= @department.employees.each do |employee| %>
-    <% if employee.avatar.attached? %>
-      <div>
-        <%= image_tag employee.avatar, alt:"Employee avatar", style: "width: 80px" %>
-      </div>
-    <% end %>
-    <p><%= employee.name %></p>
-    <p><%= employee.position %></p>
-    <%= link_to "Edit", edit_employee_path(employee) %>
-    <%= link_to "Delete", employee_path(employee), data: { turbo_method: :delete, confirm: "Are you sure?" } %>
+    <%= render  "employees/employee_card", employee: employee %>
   <% end %>
 </div>

@@ -1,25 +1,23 @@
 <p style="color: green"><%= notice %></p>
 
 <div>
-  <% if @department.cover.attached? %>
-  <div>
-    <%= image_tag @department.cover, alt:"Department cover" %>
-  </div>
-  <% end %>
-  
   <p>
-    <strong>Name:</strong>
-    <%= @department.name %>
+    <strong><%= @department.name %></strong>
   </p>
 
   <p>
-    <strong>Description:</strong>
     <%= @department.description %>
   </p>
 
   <p>
     <%= link_to "New employee", new_employee_path %>
   </p>
+</div>
+
+<div>
+  <% if @department.employees.empty? %>
+    <p>No employees yet</p>
+  <% end %> 
 </div>
 
 <div>

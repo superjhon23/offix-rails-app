@@ -36,15 +36,11 @@ class DepartmentsController < ApplicationController
 
   # PATCH/PUT /departments/1 or /departments/1.json
   def update
-    respond_to do |format|
       if @department.update(department_params)
-        format.html { redirect_to department_url(@department), notice: "Department was successfully updated." }
-        format.json { render :show, status: :ok, location: @department }
+        redirect_to departments_path, notice: "Department was successfully updated."
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @department.errors, status: :unprocessable_entity }
+        render :edit, status: :unprocessable_entity
       end
-    end
   end
 
   # DELETE /departments/1 or /departments/1.json

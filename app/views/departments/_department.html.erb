@@ -1,23 +1,22 @@
 <div id="<%= dom_id department %>">
   <% if department.cover.attached? %>
   <div>
-    <%= image_tag department.cover, alt:"Department cover" %>
+    <%= image_tag department.cover, alt:"Department cover", style: "width: 600px" %>
   </div>
   <% end %>
 
   <p>
-    <strong>Name:</strong>
-    <%= department.name %>
+    <strong><%= department.name %></strong>    
   </p>
 
   <p>
-    <strong>Description:</strong>
-    <%= department.description %>
+    <%= department.employees_count %> employees
   </p>
 
-  <p>
-    <strong>Employees count:</strong>
-    <%= department.employees_count %>
-  </p>
+  <div>
+    <%= link_to "Show", department %>
+    <%= link_to  "Edit", edit_department_path(department) %>
+    <%= button_to  "Destroy", department, method: :delete %>
+  </div>
 
 </div>

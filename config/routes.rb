@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
+  resources :feedbacks
   root "departments#index"
-  resources :employees
-  resources :departments
+  resources :employees do
+    resources :feedbacks, only: :create
+  end
+  resources :departments do
+    resources :feedbacks, only: :create
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

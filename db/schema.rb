@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_22_030114) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_26_031329) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -65,8 +65,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_030114) do
     t.index ["manager_id"], name: "index_employees_on_manager_id"
   end
 
+  create_table "feedbacks", force: :cascade do |t|
+    t.text "body"
+    t.bigint "employee_id", null: false
+    t.string "feedbackable_type", null: false
+    t.bigint "feedbackable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_feedbacks_on_employee_id"
+    t.index ["feedbackable_type", "feedbackable_id"], name: "index_feedbacks_on_feedbackable"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "employees", "departments"
   add_foreign_key "employees", "employees", column: "manager_id"
+  add_foreign_key "feedbacks", "employees"
 end

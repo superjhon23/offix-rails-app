@@ -31,3 +31,14 @@
     <%= render  "employees/employee_card", employee: employee %>
   <% end %>
 </div>
+
+<h3>Feedbacks</h3>
+<%= render "feedbacks/form", { feedback: Feedback.new, feedbackable: @department} %>
+<div>
+  <% @department.receive_feedbacks.each do |feedback| %>
+    <p>By <%= feedback.employee.name %></p>
+    <p><%= feedback.body %></p>
+    <p>Created <%= ((Time.zone.now - feedback.created_at.to_time)/1.hour.seconds).floor %> hours ago</p>
+    <%= button_to "Delete feedback", feedback, method: :delete %>
+  <% end %>
+</div>

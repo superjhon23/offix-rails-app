@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_26_031329) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_28_050142) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,7 +53,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_031329) do
   create_table "employees", force: :cascade do |t|
     t.string "name"
     t.string "nationality"
-    t.string "email"
+    t.string "email", default: "", null: false
     t.string "position"
     t.date "birth_date"
     t.integer "role"
@@ -61,8 +61,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_031329) do
     t.bigint "manager_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.index ["department_id"], name: "index_employees_on_department_id"
+    t.index ["email"], name: "index_employees_on_email", unique: true
     t.index ["manager_id"], name: "index_employees_on_manager_id"
+    t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
   end
 
   create_table "feedbacks", force: :cascade do |t|

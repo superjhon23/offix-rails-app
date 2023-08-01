@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
   devise_for :employees
+  get "/new_employee", to: "employees#create"
+
   resources :feedbacks
   root "departments#index"
+  #POST employees/:employee_id/feedbacks
   resources :employees do
     resources :feedbacks, only: :create
   end
+  #POST departments/:department_id/feedbacks
   resources :departments do
     resources :feedbacks, only: :create
   end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
 end

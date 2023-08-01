@@ -19,21 +19,16 @@ class EmployeesController < ApplicationController
   def edit
   end
 
-  # POST /employees or /employees.json
+  # POST /new_employee
   def create
     @employee = Employee.new(employee_params)
     if !@employee.avatar.attached?
       @employee.avatar.attach(io: File.open("app/assets/images/default_pic.jpg"), filename: "default_default_pic.jpg")
     end
-
-    respond_to do |format|
-      if @employee.save
-        format.html { redirect_to employee_url(@employee), notice: "Employee was successfully created." }
-        format.json { render :show, status: :created, location: @employee }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @employee.errors, status: :unprocessable_entity }
-      end
+    if @employee.save
+      redirect_to @employee.department, notice: "Employee was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 

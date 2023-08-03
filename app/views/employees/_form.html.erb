@@ -1,4 +1,4 @@
-<%= form_with(model: employee, url: "/new_employee", method: :get) do |form| %>
+<%= form_with(model: employee, url: "/new_employee", method: :post) do |form| %>
   <% if employee.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
@@ -24,6 +24,11 @@
   <div>
     <%= form.label :email, style: "display: block" %>
     <%= form.text_field :email %>
+  </div>
+
+  <div>
+    <%= form.label :password, style: "display: block" %>
+    <%= form.password_field :password %>
   </div>
 
   <div>

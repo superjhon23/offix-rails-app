@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :employees
-  get "/new_employee", to: "employees#create"
+  post "/new_employee", to: "employees#create"
 
   resources :feedbacks
   root "departments#index"

@@ -17,11 +17,6 @@
   </div>
 
   <div>
-    <%= form.label :employee_id, style: "display: block" %>
-    <%= form.collection_select :employee_id, Employee.order(:name), :id, :name %>
-  </div>
-
-  <div>
     <%= form.text_field :feedbackable_id, hidden: true%>
   </div>
 

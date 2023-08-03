@@ -28,6 +28,7 @@ class FeedbacksController < ApplicationController
     end
     @feedback = Feedback.new(feedback_params)
     @feedback.feedbackable = feedbackable
+    @feedback.employee = current_employee
 
       if @feedback.save
         redirect_to @feedback.feedbackable, notice: "Feedback was successfully created."
@@ -53,7 +54,6 @@ class FeedbacksController < ApplicationController
   def destroy
     @feedback.destroy
       redirect_to @feedback.feedbackable, notice: "Feedback was successfully destroyed.", status: :see_other
-    end
   end
 
   private
@@ -64,6 +64,6 @@ class FeedbacksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def feedback_params
-      params.require(:feedback).permit(:body, :employee_id)
+      params.require(:feedback).permit(:body)
     end
 end

@@ -8,7 +8,9 @@
   </p>
 
   <p>
-    <%= link_to "New employee test", "/employees/new" %>
+    <% if policy(Employee).new? %> 
+      <%= link_to "New employee test", "/employees/new" %>
+    <% end %>
   </p>
 </div>
 

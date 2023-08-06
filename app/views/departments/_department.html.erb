@@ -15,8 +15,12 @@
 
   <div>
     <%= link_to "Show", department %>
-    <%= link_to  "Edit", edit_department_path(department) %>
-    <%= button_to  "Destroy", department, method: :delete %>
+    <% if policy(Department).update? %>
+      <%= link_to  "Edit", edit_department_path(department) %>
+    <% end %>
+    <% if policy(Department).destroy? %>
+      <%= button_to  "Destroy", department, method: :delete %>
+    <% end %>
   </div>
 
 </div>

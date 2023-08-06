@@ -13,6 +13,7 @@ class EmployeesController < ApplicationController
   # GET /employees/new
   def new
     @employee = Employee.new
+    authorize @employee
   end
 
   # GET /employees/1/edit
@@ -22,6 +23,7 @@ class EmployeesController < ApplicationController
   # POST /new_employee
   def create
     @employee = Employee.new(employee_params)
+    authorize @employee
     if !@employee.avatar.attached?
       @employee.avatar.attach(io: File.open("app/assets/images/default_pic.jpg"), filename: "default_default_pic.jpg")
     end
